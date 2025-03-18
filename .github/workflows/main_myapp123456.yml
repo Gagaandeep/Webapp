@@ -25,7 +25,7 @@ jobs:
         run: npm run build  # Adjust based on your framework
 
       - name: Create a Student Info File
-        run: echo "Student Name: Gagandeep\nStudent ID: 500223741" > create student_info.txt
+        run: echo "Student Name: Gagandeep\nStudent ID: 500223741" > student_info.txt
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
