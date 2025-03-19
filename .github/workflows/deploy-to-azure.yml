@@ -1,0 +1,35 @@
+name: Deploy to Azure App Service
+
+on:
+  push:
+    branches:
+      - main  # Change this if your branch is different
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set Up Node.js (for Node.js apps)
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies
+        run: npm install  # Change this if using a different tech stack
+
+      - name: Build Project
+        run: npm run build  # Adjust based on your framework
+
+      - name: Create a Student Info File
+        run: echo "Student Name: Gagandeep\nStudent ID: 500223741" > student_info.txt
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+          package: .
